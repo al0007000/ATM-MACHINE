@@ -6,7 +6,6 @@ customer = {
 
 balance = 10000
 withdrawn_today = 0
-transactions = []
 
 
 def check_balance():
@@ -26,7 +25,6 @@ def deposit_money():
         return
 
     balance += amount
-    transactions.append("Deposited ₹" + str(amount))
 
     print("Amount deposited successfully.")
     print("New Balance: ₹", balance)
@@ -55,10 +53,9 @@ def withdraw_money():
 
     else:
         print("Processing money...")
+
         balance -= amount
         withdrawn_today += amount
-
-        transactions.append("Withdrawn ₹" + str(amount))
 
         print("\n----- RECEIPT -----")
         print("Account:", customer["account"])
@@ -69,18 +66,6 @@ def withdraw_money():
         print("Please collect your cash.")
 
 
-def mini_statement():
-    print("\n----- MINI STATEMENT -----")
-
-    if len(transactions) == 0:
-        print("No transactions available.")
-    else:
-        for transaction in transactions:
-            print("-", transaction)
-
-    print("Current Balance: ₹", balance)
-
-
 def daily_limit():
     print("\n----- DAILY LIMIT -----")
     print("Daily Limit: ₹25000")
@@ -89,9 +74,6 @@ def daily_limit():
 
 
 def change_pin():
-    global customer
-
-    print("\n----- CHANGE PIN -----")
     old_pin = input("Enter current PIN: ")
 
     if old_pin != customer["pin"]:
@@ -151,10 +133,9 @@ if authenticate():
         print("1. Check Balance")
         print("2. Deposit Money")
         print("3. Withdraw Money")
-        print("4. Mini Statement")
-        print("5. Check Daily Limit")
-        print("6. Change PIN")
-        print("7. Exit")
+        print("4. Check Daily Limit")
+        print("5. Change PIN")
+        print("6. Exit")
         print("===============================")
 
         choice = input("Enter your choice: ")
@@ -169,15 +150,12 @@ if authenticate():
             withdraw_money()
 
         elif choice == "4":
-            mini_statement()
-
-        elif choice == "5":
             daily_limit()
 
-        elif choice == "6":
+        elif choice == "5":
             change_pin()
 
-        elif choice == "7":
+        elif choice == "6":
             print("\nThank you for using our ATM.")
             print("Please take your card.")
             print("Have a nice day!")
